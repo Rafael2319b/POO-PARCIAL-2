@@ -4,15 +4,13 @@ Este proyecto consiste en una API para la gestión de envíos de la empresa POST
 
 ## Endpoints de la API
 
----
-
 ### 1. Crear un cliente con plan de envíos
 
 - **Método:** POST  
 - **Ruta:** `/clientes`  
 - **Descripción:** Crea un nuevo cliente asignándole créditos según el plan.
 
-Planes disponibles:
+**Planes disponibles:**
 - `30 envíos` → 30 créditos
 - `40 envíos` → 40 créditos
 - `60 envíos` → 60 créditos
@@ -23,11 +21,7 @@ Planes disponibles:
   "nombre": "Rafael Vásquez",
   "plan": "30 envíos"
 }
-Respuesta esperada:
 
-json
-Copiar
-Editar
 {
   "_id": "cliente_id",
   "nombre": "Rafael Vásquez",
@@ -35,33 +29,27 @@ Editar
   "credito_envios": 30,
   "envios": []
 }
-2. Ver envíos disponibles (créditos) de un cliente
-Método: GET
 
-Ruta: /clientes/:id/envios-disponibles
+### 2. Ver créditos de un usuario
 
-Descripción: Consulta los créditos (envíos) disponibles de un cliente.
+- **Método:** GET  
+- **Ruta:** `/credito/:id`  
+- **Descripción:** Verifica los créditos disponibles del usuario.
 
-Respuesta esperada:
-
-json
-Copiar
-Editar
+**Respuesta esperada:**
+```json
 {
   "credito_envios": 30
 }
-3. Registrar un nuevo envío
-Método: POST
 
-Ruta: /clientes/:id/envios
+### 3. Registrar un nuevo envío
 
-Descripción: Registra un nuevo envío para el cliente y descuenta 1 crédito.
+- **Método:** POST  
+- **Ruta:** `/clientes/:id/envios`  
+- **Descripción:** Registra un nuevo envío para el cliente y descuenta 1 crédito.
 
-Ejemplo JSON del cuerpo:
-
-json
-Copiar
-Editar
+**Ejemplo JSON del cuerpo:**
+```json
 {
   "nombre": "Rafael Vásquez",
   "direccion": "Calle 123",
@@ -73,11 +61,7 @@ Editar
   "bultos": 1,
   "fecha_entrega": "2025-05-29"
 }
-Respuesta esperada (cliente actualizado):
 
-json
-Copiar
-Editar
 {
   "_id": "cliente_id",
   "nombre": "Rafael Vásquez",
@@ -97,18 +81,14 @@ Editar
     }
   ]
 }
-4. Consultar todos los envíos de un cliente
-Método: GET
+### 4. Consultar todos los envíos de un cliente
 
-Ruta: /clientes/:id/envios
+- **Método:** GET  
+- **Ruta:** `/clientes/:id/envios`  
+- **Descripción:** Consulta todos los envíos registrados de un cliente.
 
-Descripción: Consulta todos los envíos registrados de un cliente.
-
-Respuesta esperada:
-
-json
-Copiar
-Editar
+**Respuesta esperada:**
+```json
 [
   {
     "nombre": "Rafael Vásquez",
@@ -122,45 +102,55 @@ Editar
     "fecha_entrega": "2025-05-29"
   }
 ]
-5. Eliminar un envío y reembolsar crédito
-Método: DELETE
+### 5. Eliminar un envío y reembolsar crédito
 
-Ruta: /clientes/:clienteId/envios/:envioId
+- **Método:** DELETE  
+- **Ruta:** `/clientes/:clienteId/envios/:envioId`  
+- **Descripción:** Elimina un envío registrado y devuelve 1 crédito al cliente.
 
-Descripción: Elimina un envío registrado y devuelve 1 crédito al cliente.
-
-Respuesta esperada:
-
-json
-Copiar
-Editar
+**Respuesta esperada:**
+```json
 {
   "message": "Envío eliminado y crédito reembolsado"
 }
-¿Cómo ejecutar el proyecto?
-Clona este repositorio:
 
-bash
-Copiar
-Editar
-git clone https://github.com/Rafael2319b/POO-PARCIAL-2
+## ¿Cómo ejecutar el proyecto?
+
+1. **Clona este repositorio:**
+   
+   Abre tu terminal y ejecuta el siguiente comando para clonar el repositorio:
+
+   ```bash
+   git clone https://github.com/Rafael2319b/POO-PARCIAL-2
+
 Instala las dependencias:
+
+Una vez clonado el repositorio, navega a la carpeta del proyecto y ejecuta el siguiente comando para instalar las dependencias:
 
 bash
 Copiar
 Editar
 npm install
 Configura las variables de entorno:
-Crea un archivo .env en la raíz del proyecto y agrega tus credenciales de MongoDB y otras configuraciones necesarias.
 
+Crea un archivo .env en la raíz del proyecto y agrega tus credenciales de MongoDB y cualquier otra configuración que necesite tu aplicación. Ejemplo:
+
+env
+Copiar
+Editar
+MONGO_URI=mongodb://localhost:27017/postmail
+PORT=5000
 Ejecuta el servidor:
+
+Para iniciar el servidor, ejecuta el siguiente comando en la terminal:
 
 bash
 Copiar
 Editar
 npm start
 Prueba la API:
-Puedes usar herramientas como Postman o Insomnia para hacer pruebas con los endpoints descritos arriba.
+
+Puedes usar herramientas como Postman o Insomnia para realizar pruebas con los endpoints descritos arriba.
 
 Tecnologías utilizadas
 Node.js
@@ -173,10 +163,6 @@ Mongoose
 
 Autor
 Rafael Alexander Vásquez Hernández
-
-nginx
-Copiar
-Editar
 
 
 
