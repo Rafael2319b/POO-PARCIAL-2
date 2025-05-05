@@ -4,13 +4,15 @@ Este proyecto consiste en una API para la gestión de envíos de la empresa POST
 
 ## Endpoints de la API
 
+---
+
 ### 1. Crear un cliente con plan de envíos
 
 - **Método:** POST  
 - **Ruta:** `/clientes`  
 - **Descripción:** Crea un nuevo cliente asignándole créditos según el plan.
 
-**Planes disponibles:**
+Planes disponibles:
 - `30 envíos` → 30 créditos
 - `40 envíos` → 40 créditos
 - `60 envíos` → 60 créditos
@@ -19,21 +21,26 @@ Este proyecto consiste en una API para la gestión de envíos de la empresa POST
 ```json
 {
   "nombre": "Rafael Vásquez",
-  "plan": "30 envíos"
+  "plan": "30 envíos",
+  "credito_envios": 30
 }
 
+```
+
+**Respuesta esperada:**
+```json
 {
-  "_id": "cliente_id",
+  "_id": "clienteId",
   "nombre": "Rafael Vásquez",
   "plan": "30 envíos",
   "credito_envios": 30,
   "envios": []
 }
 
-### 2. Ver créditos de un usuario
-
-- **Método:** GET  
-- **Ruta:** `/credito/:id`  
+```
+### 2.Ver créditos de un usuario
+- **Método:** `GET`  
+- **Ruta:** `/clientes/:id/envios-disponibles`  
 - **Descripción:** Verifica los créditos disponibles del usuario.
 
 **Respuesta esperada:**
@@ -42,127 +49,128 @@ Este proyecto consiste en una API para la gestión de envíos de la empresa POST
   "credito_envios": 30
 }
 
+```
+
+---
+
 ### 3. Registrar un nuevo envío
-
-- **Método:** POST  
+- **Método:** `POST`  
 - **Ruta:** `/clientes/:id/envios`  
-- **Descripción:** Registra un nuevo envío para el cliente y descuenta 1 crédito.
+- **Descripción:** Registra un nuevo envío para un usuario, asignando el producto y los detalles del envío.
 
-**Ejemplo JSON del cuerpo:**
+**Ejemplo de cuerpo (JSON):**
 ```json
 {
   "nombre": "Rafael Vásquez",
-  "direccion": "Calle 123",
-  "telefono": "7182-9499",
-  "referencia": "Casa color Negro",
-  "observacion": "Entregar viernes",
-  "descripcion": "Tenis",
-  "peso": 2,
+  "direccion": "Calle Falsa 123",
+  "telefono": "123456789",
+  "referencia": "Casa con portón rojo",
+  "observacion": "Entregar de lunes a viernes",
+  "descripcion": "Paquete con documentos",
+  "peso": 4,
   "bultos": 1,
-  "fecha_entrega": "2025-05-29"
+  "fecha_entrega": "2025-05-10T10:00:00Z"
 }
 
+```
+**Respuesta esperada:**
+```json
 {
-  "_id": "cliente_id",
-  "nombre": "Rafael Vásquez",
-  "plan": "30 envíos",
-  "credito_envios": 29,
-  "envios": [
-    {
-      "nombre": "Rafael Vásquez",
-      "direccion": "Calle 123",
-      "telefono": "7182-9499",
-      "referencia": "Casa color Negro",
-      "observacion": "Entregar viernes",
-      "descripcion": "Tenis",
-      "peso": 2,
+  "descripcion": "Paquete con documentos",
+      "peso": 4,
       "bultos": 1,
-      "fecha_entrega": "2025-05-29"
-    }
-  ]
-}
-### 4. Consultar todos los envíos de un cliente
+      "fecha_entrega": "2025-05-10T10:00:00.000Z",
+      "nombre": "Rafael Vásquez",
+      "direccion": "Calle Falsa 123",
+      "telefono": "123456789",
+      "referencia": "Casa con portón rojo",
+      "observacion": "Entregar de lunes a viernes",
+      "costo": 9,
+      "_id": "68186f2bdb5868011e793b4e"
+},
+```
 
-- **Método:** GET  
+---
+
+### 4. Consultar todos los envíos de un usuario
+- **Método:** `GET`  
 - **Ruta:** `/clientes/:id/envios`  
-- **Descripción:** Consulta todos los envíos registrados de un cliente.
+- **Descripción:** Consulta todos los envíos registrados de un usuario.
 
 **Respuesta esperada:**
 ```json
-[
-  {
-    "nombre": "Rafael Vásquez",
-    "direccion": "Calle 123",
-    "telefono": "7182-9499",
-    "referencia": "Casa color Negro",
-    "observacion": "Entregar viernes",
-    "descripcion": "Tenis",
-    "peso": 2,
+{
+  "envios": [
+    {
+    "descripcion": "Paquete con documentos",
+    "peso": 4,
     "bultos": 1,
-    "fecha_entrega": "2025-05-29"
-  }
-]
-### 5. Eliminar un envío y reembolsar crédito
+    "fecha_entrega": "2025-05-10T10:00:00.000Z",
+    "nombre": "Rafael Vásquez",
+    "direccion": "Calle Falsa 123",
+    "telefono": "123456789",
+    "referencia": "Casa con portón rojo",
+    "observacion": "Entregar de lunes a viernes",
+    "costo": 9,
+    "_id": "68186f2bdb5868011e793b4e"
+    }
+  ]
+}
+```
 
-- **Método:** DELETE  
+---
+
+### 5. Eliminar un envío y devolver créditos
+- **Método:** `DELETE`  
 - **Ruta:** `/clientes/:clienteId/envios/:envioId`  
-- **Descripción:** Elimina un envío registrado y devuelve 1 crédito al cliente.
+- **Descripción:** Elimina un envío registrado y devuelve los créditos al usuario.
 
 **Respuesta esperada:**
 ```json
 {
   "message": "Envío eliminado y crédito reembolsado"
 }
+```
 
+---
 ## ¿Cómo ejecutar el proyecto?
 
-1. **Clona este repositorio:**
-   
-   Abre tu terminal y ejecuta el siguiente comando para clonar el repositorio:
+1. Clona este repositorio:
+```bash
+git clone https://github.com/Rafael2319b/POO-PARCIAL-2
+```
 
-   ```bash
-   git clone https://github.com/Rafael2319b/POO-PARCIAL-2
-
-Instala las dependencias:
-
-Una vez clonado el repositorio, navega a la carpeta del proyecto y ejecuta el siguiente comando para instalar las dependencias:
-
-bash
-Copiar
-Editar
+2. Instala las dependencias:
+```bash
 npm install
-Configura las variables de entorno:
+```
 
-Crea un archivo .env en la raíz del proyecto y agrega tus credenciales de MongoDB y cualquier otra configuración que necesite tu aplicación. Ejemplo:
+3. Configura las variables de entorno:
+Crea un archivo llamado `.env` en la raíz del proyecto y agrega ahí la conexión a tu base de datos MongoDB y otras configuraciones necesarias.  
 
-env
-Copiar
-Editar
-MONGO_URI=mongodb://localhost:27017/postmail
-PORT=5000
-Ejecuta el servidor:
-
-Para iniciar el servidor, ejecuta el siguiente comando en la terminal:
-
-bash
-Copiar
-Editar
+4. Ejecuta el servidor:
+```bash
 npm start
-Prueba la API:
+```
 
-Puedes usar herramientas como Postman o Insomnia para realizar pruebas con los endpoints descritos arriba.
+5. Prueba la API:
+Puedes usar herramientas como Postman o Insomnia para hacer pruebas con los endpoints descritos arriba.
 
-Tecnologías utilizadas
-Node.js
+---
 
-Express.js
+## Tecnologías utilizadas
 
-MongoDB
+- Node.js  
+- Express.js  
+- MongoDB  
+- Mongoose  
 
-Mongoose
+---
 
-Autor
-Rafael Alexander Vásquez Hernández
+## Autor
+
+**Rafael Alexander Vásquez Hernández**
+
 
 
 
