@@ -23,8 +23,11 @@ Planes disponibles:
   "nombre": "Rafael Vásquez",
   "plan": "30 envíos"
 }
-
 Respuesta esperada:
+
+json
+Copiar
+Editar
 {
   "_id": "cliente_id",
   "nombre": "Rafael Vásquez",
@@ -32,7 +35,6 @@ Respuesta esperada:
   "credito_envios": 30,
   "envios": []
 }
-
 2. Ver envíos disponibles (créditos) de un cliente
 Método: GET
 
@@ -83,15 +85,15 @@ Editar
   "credito_envios": 29,
   "envios": [
     {
-       "nombre": "Rafael Vásquez",
-       "direccion": "Calle 123",
-       "telefono": "7182-9499",
-       "referencia": "Casa color Negro",
-       "observacion": "Entregar viernes",
-       "descripcion": "Tenis",
-       "peso": 2,
-       "bultos": 1,
-       "fecha_entrega": "2025-05-29"
+      "nombre": "Rafael Vásquez",
+      "direccion": "Calle 123",
+      "telefono": "7182-9499",
+      "referencia": "Casa color Negro",
+      "observacion": "Entregar viernes",
+      "descripcion": "Tenis",
+      "peso": 2,
+      "bultos": 1,
+      "fecha_entrega": "2025-05-29"
     }
   ]
 }
@@ -109,15 +111,15 @@ Copiar
 Editar
 [
   {
-  "nombre": "Rafael Vásquez",
-  "direccion": "Calle 123",
-  "telefono": "7182-9499",
-  "referencia": "Casa color Negro",
-  "observacion": "Entregar viernes",
-  "descripcion": "Tenis",
-  "peso": 2,
-  "bultos": 1,
-  "fecha_entrega": "2025-05-29"
+    "nombre": "Rafael Vásquez",
+    "direccion": "Calle 123",
+    "telefono": "7182-9499",
+    "referencia": "Casa color Negro",
+    "observacion": "Entregar viernes",
+    "descripcion": "Tenis",
+    "peso": 2,
+    "bultos": 1,
+    "fecha_entrega": "2025-05-29"
   }
 ]
 5. Eliminar un envío y reembolsar crédito
@@ -135,6 +137,48 @@ Editar
 {
   "message": "Envío eliminado y crédito reembolsado"
 }
+¿Cómo ejecutar el proyecto?
+Clona este repositorio:
+
+bash
+Copiar
+Editar
+git clone https://github.com/Rafael2319b/POO-PARCIAL-2
+Instala las dependencias:
+
+bash
+Copiar
+Editar
+npm install
+Configura las variables de entorno:
+Crea un archivo .env en la raíz del proyecto y agrega tus credenciales de MongoDB y otras configuraciones necesarias.
+
+Ejecuta el servidor:
+
+bash
+Copiar
+Editar
+npm start
+Prueba la API:
+Puedes usar herramientas como Postman o Insomnia para hacer pruebas con los endpoints descritos arriba.
+
+Tecnologías utilizadas
+Node.js
+
+Express.js
+
+MongoDB
+
+Mongoose
+
+Autor
+Rafael Alexander Vásquez Hernández
+
+nginx
+Copiar
+Editar
+
+
 
 
 
